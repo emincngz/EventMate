@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <!-- Meta Etiketleri -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventMate - Etkinlikler</title>
+    <!-- CSS Bağlantısı -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header Bölümü -->
+    <header>
+        <div class="container">
+            <!-- Site Başlığı -->
+            <h1>
+                <a href="/" class="site-title">EventMate</a>
+            </h1>
+            <!-- Mobil Menü -->
+            <nav class="mobile-menu">
+                <!-- Hamburger Menü Butonu -->
+                <button class="menu-toggle" aria-label="Menüyü Aç/Kapat">☰</button>
+                <!-- Navigasyon Menüsü -->
+                <ul class="menu">
+                    <li><a href="/">Ana Sayfa</a></li>
+                    <li><a href="/etkinlikler" class="active">Etkinlikler</a></li>
+                    <li><a href="/etkinlik-olustur">Etkinlik Oluştur</a></li>
+                    <li><a href="/hakkimizda">Hakkımızda</a></li>
+                    <li><a href="/iletisim">İletişim</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Ana İçerik -->
+    <main>
+        <!-- Etkinlikler Listesi Bölümü -->
+        <section class="events-list">
+            <div class="container">
+                <!-- Arama Kutusu -->
+                <div class="search-container">
+                    <input type="text" id="searchInput" placeholder="Etkinlik ara...">
+                </div>
+                <!-- Bölüm Başlığı -->
+                <h3>Yaklaşan Etkinlikler</h3>
+                <!-- Etkinlik Kartları JavaScript ile Eklenecek -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Bölümü -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 EventMate. Tüm Hakları Saklıdır.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Kodları -->
+    <script>
+        // Mobil menü toggle fonksiyonu
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('.menu');
+
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+    </script>
+
+    <!-- Etkinlik Listesi JavaScript Dosyası -->
+    <script src="/js/listEvents.js"></script>
+</body>
+</html>

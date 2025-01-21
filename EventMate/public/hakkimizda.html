@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <!-- Meta Etiketleri -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventMate - Hakkımızda</title>
+    <!-- CSS Bağlantısı -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header Bölümü -->
+    <header>
+        <div class="container">
+            <!-- Site Başlığı -->
+            <h1>
+                <a href="/" class="site-title">EventMate</a>
+            </h1>
+            <!-- Mobil Menü -->
+            <nav class="mobile-menu">
+                <!-- Hamburger Menü Butonu -->
+                <button class="menu-toggle" aria-label="Menüyü Aç/Kapat">☰</button>
+                <!-- Navigasyon Menüsü -->
+                <ul class="menu">
+                    <li><a href="/">Ana Sayfa</a></li>
+                    <li><a href="/etkinlikler">Etkinlikler</a></li>
+                    <li><a href="/etkinlik-olustur">Etkinlik Oluştur</a></li>
+                    <li><a href="/hakkimizda" class="active">Hakkımızda</a></li>
+                    <li><a href="/iletisim">İletişim</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Ana İçerik -->
+    <main>
+        <!-- Hakkımızda Bölümü -->
+        <section class="about">
+            <div class="container">
+                <!-- Başlık -->
+                <h3>Hakkımızda</h3>
+                <!-- Tanıtım Metni -->
+                <p>EventMate, etkinlik oluşturmak, keşfetmek ve katılmak için kullanıcı dostu bir platform sunar. Amacımız, bireylerin ve toplulukların sosyal bağlantılarını güçlendirmelerine ve yeni fırsatlar keşfetmelerine olanak tanımaktır. İster büyük bir konferans, ister küçük bir buluşma olsun, EventMate herkesin katılımını kolaylaştırmak için buradadır.</p>
+                
+                <p>Platformumuz, kullanıcılarımızın ilgi alanlarına göre kişiselleştirilmiş etkinlik önerileri sunarak, onları anlamlı deneyimlerle buluşturur. Teknolojiyi sosyal bağlantıları güçlendirmek için kullanıyor ve her kullanıcımıza benzersiz ve değerli bir deneyim sunmayı hedefliyoruz.</p>
+                
+                <!-- Vizyon Bölümü -->
+                <h4>Vizyonumuz</h4>
+                <p>Etkinlikler aracılığıyla insanları bir araya getiren, ilham veren ve yeni deneyimlere yönlendiren öncü bir platform olmak. Bu vizyon doğrultusunda, her bireyin ve topluluğun sesini duyurabileceği, güçlü bağlar kurabileceği bir ortam sunmayı amaçlıyoruz. </p>
+                
+                <!-- Ekip Bölümü -->
+                <h4>Ekibimiz</h4>
+                <p>EventMate ekibi; yazılım geliştiriciler, tasarımcılar, pazarlama uzmanları ve etkinlik yönetimi profesyonellerinden oluşur. Kullanıcılarımızın ihtiyaçlarını en iyi şekilde karşılamak ve sürekli yenilikçi çözümler sunmak için bir araya gelmiş bir topluluğuz. Takım ruhu, yaratıcılık ve kullanıcı odaklı hizmet anlayışı bizim temel değerlerimizdir.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Bölümü -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 EventMate. Tüm Hakları Saklıdır.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Kodları -->
+    <script>
+        // Mobil menü toggle fonksiyonu
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('.menu');
+
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

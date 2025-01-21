@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventMate - Etkinlik Oluştur</title>
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <!-- Leaflet Control Geocoder CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            z-index: 1;
+        }
+        .search-box {
+            margin-bottom: 15px;
+        }
+        .leaflet-container {
+            z-index: 1;
+        }
+        .leaflet-control-geocoder {
+            z-index: 2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>
+                <a href="/" class="site-title">EventMate</a>
+            </h1>
+            <nav class="mobile-menu">
+                <button class="menu-toggle" aria-label="Menüyü Aç/Kapat">☰</button>
+                <ul class="menu">
+                    <li><a href="/">Ana Sayfa</a></li>
+                    <li><a href="/etkinlikler">Etkinlikler</a></li>
+                    <li><a href="/etkinlik-olustur" class="active">Etkinlik Oluştur</a></li>
+                    <li><a href="/hakkimizda">Hakkımızda</a></li>
+                    <li><a href="/iletisim">İletişim</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="create-event">
+            <div class="container">
+                <h3>Yeni Etkinlik Oluştur</h3>
+                <form class="event-form">
+                    <div class="form-group">
+                        <label for="title">Etkinlik Adı</label>
+                        <input type="text" id="title" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="location">Konum</label>
+                        <input type="text" id="location" name="location" required>
+                        <div id="map"></div>
+                        <input type="hidden" id="latitude" name="latitude">
+                        <input type="hidden" id="longitude" name="longitude">
+                    </div>
+                    <div class="form-group">
+                        <label for="date">Tarih</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">Saat</label>
+                        <input type="time" id="time" name="time" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Açıklama</label>
+                        <textarea id="description" name="description" rows="5" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Etkinlik Oluştur</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 EventMate. Tüm Hakları Saklıdır.</p>
+        </div>
+    </footer>
+
+    <!-- Önce Leaflet ve Geocoder scriptleri -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+    <!-- Sonra map initialization scripti -->
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('.menu');
+
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+
+        // Harita başlangıç ayarları
+        const map = L.map('map').setView([39.92077, 32.85411], 6);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19
+        }).addTo(map);
+
+        let marker;
+        const locationInput = document.getElementById('location');
+
+        // Haritaya tıklama olayı
+        map.on('click', function(e) {
+            if (marker) {
+                marker.setLatLng(e.latlng);
+            } else {
+                marker = L.marker(e.latlng).addTo(map);
+            }
+            document.getElementById('latitude').value = e.latlng.lat;
+            document.getElementById('longitude').value = e.latlng.lng;
+
+            // Tıklanan konumun adresini bul
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${e.latlng.lat}&lon=${e.latlng.lng}`)
+                .then(response => response.json())
+                .then(data => {
+                    locationInput.value = data.display_name;
+                });
+        });
+
+        // Konum arama özelliği
+        const geocoder = L.Control.geocoder({
+            defaultMarkGeocode: false,
+            placeholder: "Konum ara...",
+            geocoder: L.Control.Geocoder.nominatim()
+        }).on('markgeocode', function(e) {
+            const latlng = e.geocode.center;
+            if (marker) {
+                marker.setLatLng(latlng);
+            } else {
+                marker = L.marker(latlng).addTo(map);
+            }
+            map.setView(latlng, 15);
+            document.getElementById('latitude').value = latlng.lat;
+            document.getElementById('longitude').value = latlng.lng;
+            locationInput.value = e.geocode.name;
+        }).addTo(map);
+
+        // Konum input'una yazılan adresi haritada ara
+        locationInput.addEventListener('change', function() {
+            const address = this.value;
+            geocoder.geocode(address, results => {
+                if (results.length > 0) {
+                    const latlng = results[0].center;
+                    if (marker) {
+                        marker.setLatLng(latlng);
+                    } else {
+                        marker = L.marker(latlng).addTo(map);
+                    }
+                    map.setView(latlng, 15);
+                    document.getElementById('latitude').value = latlng.lat;
+                    document.getElementById('longitude').value = latlng.lng;
+                }
+            });
+        });
+    </script>
+
+    <!-- En son createEvent.js -->
+    <script src="/js/createEvent.js"></script>
+</body>
+</html>

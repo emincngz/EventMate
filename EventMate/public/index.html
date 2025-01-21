@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <!-- Meta Etiketleri -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventMate - Ana Sayfa</title>
+    <!-- CSS Bağlantısı -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header Bölümü -->
+    <header>
+        <div class="container">
+            <!-- Site Başlığı -->
+            <h1>
+                <a href="/" class="site-title">EventMate</a>
+            </h1>
+            <!-- Mobil Menü -->
+            <nav class="mobile-menu">
+                <button class="menu-toggle" aria-label="Menüyü Aç/Kapat">☰</button>
+                <!-- Navigasyon Menüsü -->
+                <ul class="menu">
+                    <li><a href="/" class="active">Ana Sayfa</a></li>
+                    <li><a href="/etkinlikler">Etkinlikler</a></li>
+                    <li><a href="/etkinlik-olustur">Etkinlik Oluştur</a></li>
+                    <li><a href="/hakkimizda">Hakkımızda</a></li>
+                    <li><a href="/iletisim">İletişim</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Ana İçerik -->
+    <main>
+        <!-- Hero Bölümü -->
+        <section class="hero">
+            <div class="container">
+                <h2>Hayalindeki Etkinlikleri Keşfet ve Katıl</h2>
+                <p>EventMate ile en ilgi çekici etkinlikleri keşfet, etkinlik oluştur ve arkadaşlarınla paylaş.</p>
+                <a href="etkinlikler.html" class="cta-button">Etkinliklere Göz At</a>
+            </div>
+        </section>
+
+        <!-- Öne Çıkan Etkinlikler -->
+        <section class="highlights">
+            <div class="container">
+                <h3>Öne Çıkan Etkinlikler</h3>
+                <!-- Dinamik Etkinlik Kartları -->
+                <div class="card-grid">
+                    <!-- Etkinlikler JavaScript ile dinamik olarak eklenecek -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 EventMate. Tüm Hakları Saklıdır.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Dosyaları -->
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('.menu');
+
+        menuToggle.addEventListener('click', () => {
+            menu.classList.toggle('active');
+        });
+    </script>
+
+    <script src="/js/featuredEvents.js"></script>
+</body>
+</html>
